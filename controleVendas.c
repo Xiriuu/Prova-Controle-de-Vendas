@@ -63,12 +63,12 @@ void consultarProduto(Produto p[], int qtdProd)
     }
     printf("\n\n");
 }
-void consultarVendas(Venda vend[], int qtdVendas)
+void consultarVendas(Venda v[], int qtdVendas)
 {
     printf("\n>>>> Vendas Realizadas <<<< ");
     for (int i = 0; i < qtdVendas; i++)
     {
-        printf("\n%d. Cliente: %d | Produto: %d | Quantidade Produto: %d | Valor Total R$: %.2f |", (i + 1), (vend[i].idCliente), vend[i].idProduto, vend[i].quantProduto, vend[i].valorTotal);
+        printf("\n%d. Cliente: %d\nProduto: %d | Quantidade: %d\nValor Total R$: %.2f", (i + 1), v[i].idCliente, v[i].idProduto, v[i].quantProduto, v[i].valorTotal);
         printf("\n");
     }
 }
@@ -157,6 +157,22 @@ int realizarVenda(Cliente c[], Produto p[], Venda v[], int qtdCli, int qtdProd, 
     }
     return 0;
 }
+int alterarEstoque(Produto p[])
+{
+    int codProd, qtdProd = 0;
+    printf("\nDigite o código do produto: ");
+    scanf("%d", &codProd);
+
+    if (codProd == p[codProd - 1].id)
+    {
+        printf("\nProtuto: %s\nEstoque atual: %d", p[codProd - 1].nome, p[codProd - 1].quantidade);
+        printf("\nQuantos unidades possui em estoque: ");
+        scanf("%d", &qtdProd);
+        p[codProd - 1].quantidade = qtdProd;
+
+        printf("\nEstoque atualizado, total em estoque: %d", p[codProd-1].quantidade);
+    }
+}
 
 int main()
 {
@@ -177,7 +193,8 @@ int main()
         printf("\n\t4 - Consultar Produtos");
         printf("\n\t5 - Vender");
         printf("\n\t6 - Consultar Vendas");
-        printf("\n\t7 - Sair\n\t>>>> ");
+        printf("\n\t7 - Alterar Estoque");
+        printf("\n\t8 - Sair\n\t>>>> ");
         scanf("%d", &opcao);
 
         if (opcao == 1)
@@ -253,6 +270,10 @@ int main()
             }
         }
         else if (opcao == 7)
+        {
+            alterarEstoque(produtos);
+        }
+        else if (opcao == 8)
         {
             sair = 1;
         }
