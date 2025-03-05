@@ -157,7 +157,7 @@ int realizarVenda(Cliente c[], Produto p[], Venda v[], int qtdCli, int qtdProd, 
     }
     return 0;
 }
-int alterarEstoque(Produto p[])
+void alterarEstoque(Produto p[])
 {
     int codProd, qtdProd = 0;
     printf("\nDigite o código do produto: ");
@@ -165,12 +165,20 @@ int alterarEstoque(Produto p[])
 
     if (codProd == p[codProd - 1].id)
     {
-        printf("\nProtuto: %s\nEstoque atual: %d", p[codProd - 1].nome, p[codProd - 1].quantidade);
+        printf("\nProduto: %s\nEstoque atual: %d", p[codProd - 1].nome, p[codProd - 1].quantidade);
         printf("\nQuantos unidades possui em estoque: ");
         scanf("%d", &qtdProd);
-        p[codProd - 1].quantidade = qtdProd;
-
-        printf("\nEstoque atualizado, total em estoque: %d", p[codProd-1].quantidade);
+        
+        if(qtdProd >= 0){
+            p[codProd - 1].quantidade = qtdProd;
+            printf("\nEstoque atualizado, total em estoque: %d", p[codProd - 1].quantidade);
+        } else {
+            printf("\nQuantidade Invalida!");
+        }
+    }
+    else
+    {
+        printf("\nProduto não encontrado!");
     }
 }
 
