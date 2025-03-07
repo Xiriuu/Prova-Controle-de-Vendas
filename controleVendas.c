@@ -135,7 +135,11 @@ int realizarVenda(Cliente c[], Produto p[], Venda v[], int qtdCli, int qtdProd, 
                     v[qtdVendas].idProduto = codProd;
                     v[qtdVendas].quantProduto = quantProd;
                     v[qtdVendas].valorTotal = (quantProd * p[indiceProd].valor);
-
+                    if (v[qtdVendas].valorTotal > 100)
+                    {
+                        v[qtdVendas].valorTotal = v[qtdVendas].valorTotal - (v[qtdVendas].valorTotal * 0.05);
+                        printf("\n\tDesconto de 5%% aplicado!\n\tValor Total: %.2f", v[qtdVendas].valorTotal);
+                    }
                     p[indiceProd].quantidade = p[indiceProd].quantidade - quantProd;
                     printf("\n\nVenda Realizada com Sucesso!");
                     return 1;
@@ -168,11 +172,14 @@ void alterarEstoque(Produto p[])
         printf("\nProduto: %s\nEstoque atual: %d", p[codProd - 1].nome, p[codProd - 1].quantidade);
         printf("\nQuantos unidades possui em estoque: ");
         scanf("%d", &qtdProd);
-        
-        if(qtdProd >= 0){
+
+        if (qtdProd >= 0)
+        {
             p[codProd - 1].quantidade = qtdProd;
             printf("\nEstoque atualizado, total em estoque: %d", p[codProd - 1].quantidade);
-        } else {
+        }
+        else
+        {
             printf("\nQuantidade Invalida!");
         }
     }
@@ -194,7 +201,7 @@ int main()
 
     do
     {
-        printf("\n\n>>>> Sistema de Vendas <<<< ");
+        printf("\n\n>>>> Sistema de Vendas <<<<");
         printf("\n\t1 - Cadastrar Clientes");
         printf("\n\t2 - Cadastrar Produtos");
         printf("\n\t3 - Consultar Clientes");
