@@ -212,7 +212,8 @@ void exibirVendasPorCliente(Venda v[], int qtdVendas)
                 printf("\n");
             }
         }
-        if(achouCli == 0){
+        if (achouCli == 0)
+        {
             printf("\nCliente ou venda não encontrado!");
         }
     }
