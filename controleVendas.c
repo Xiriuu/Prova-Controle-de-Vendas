@@ -188,6 +188,35 @@ void alterarEstoque(Produto p[])
         printf("\nProduto não encontrado!");
     }
 }
+void exibirVendasPorCliente(Venda v[], int qtdVendas)
+{
+    int codCli, achouCli = 0;
+    if (qtdVendas == 0)
+    {
+        printf("\n\nNenhuma venda realizada...");
+    }
+    else if (qtdVendas > 0)
+    {
+        printf("\nDigite o código do cliente: ");
+        scanf("%d", &codCli);
+
+        for (int i = 0; i < qtdVendas; i++)
+        {
+            if (codCli == v[i].idCliente)
+            {
+                achouCli = 1;
+            }
+            if (achouCli == 1)
+            {
+                printf("\nCliente: %d\nProduto: %d | Quantidade: %d\nValor Total R$: %.2f", v[i].idCliente, v[i].idProduto, v[i].quantProduto, v[i].valorTotal);
+                printf("\n");
+            }
+        }
+        if(achouCli == 0){
+            printf("\nCliente ou venda não encontrado!");
+        }
+    }
+}
 
 int main()
 {
@@ -209,7 +238,8 @@ int main()
         printf("\n\t5 - Vender");
         printf("\n\t6 - Consultar Vendas");
         printf("\n\t7 - Alterar Estoque");
-        printf("\n\t8 - Sair\n\t>>>> ");
+        printf("\n\t8 - Consultar Vendas por Cliente");
+        printf("\n\t9 - Sair\n\t>>>> ");
         scanf("%d", &opcao);
 
         if (opcao == 1)
@@ -289,6 +319,10 @@ int main()
             alterarEstoque(produtos);
         }
         else if (opcao == 8)
+        {
+            exibirVendasPorCliente(vendas, quantVendasRealizadas);
+        }
+        else if (opcao == 9)
         {
             sair = 1;
         }
